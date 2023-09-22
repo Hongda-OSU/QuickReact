@@ -1,0 +1,29 @@
+.course {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+}
+
+.course-title {
+  margin: 10px 0 0 10px !important;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+
+.course-content {
+  min-height: 120px;
+  margin: 10px 40px 0 10px !important;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px !important;
+  text-align: left;
+}
+
+.course-time {
+  min-height: 20px;
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center; 
+  margin: 10px 0 0 10px !important;
+}

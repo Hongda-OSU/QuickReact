@@ -35,10 +35,10 @@ const schedule = {
 
 const App = () => {
   return (
-    <>
-      <Banner title={schedule.title} />
+    <div className="app">
+     <Banner title={schedule.title} />
       <CourseList courses={schedule.courses} />
-    </>
+    </div>
   );
 };
 
