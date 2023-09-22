@@ -1,7 +1,7 @@
 import Course from "../Course/Course";
 import { useAppSelector } from "../../store/hook";
 import { getCourseSchedulerTermCourses } from "../../store/slices/courseSchedulerSlice";
-import "./CourseList.css";
+import "./CourseList.less";
 
 const CourseList = () => {
   const courses = useAppSelector(getCourseSchedulerTermCourses);

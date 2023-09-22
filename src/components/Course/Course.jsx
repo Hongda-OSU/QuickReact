@@ -2,7 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import "./Course.css";
+import "./Course.less";
 
 const Course = ({ term, number, title, meets }) => {
   return (

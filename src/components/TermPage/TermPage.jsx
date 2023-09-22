@@ -1,6 +1,6 @@
 import TermFilter from "../TermFilter/TermFiler";
 import CourseList from "../CourseList/CourseList";
-import "./TermPage.css"
+import "./TermPage.less"
 
 const TermPage = () => {
   return (

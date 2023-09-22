@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import Banner from "./components/Banner/Banner";
 import TermPage from "./components/TermPage/TermPage";
@@ -9,7 +9,7 @@ import {
   getCourseSchedulerCourses,
   setCourseSchedulerCourses,
 } from "../src/store/slices/courseSchedulerSlice";
-import "./App.css";
+import "./App.less";
 
 const App = () => {
   const url =

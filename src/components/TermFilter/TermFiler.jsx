@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { getCourseSchedulerTerm, setCourseSchedulerTerm } from "../../store/slices/courseSchedulerSlice";
-import "./TermFilter.css";
+import "./TermFilter.less";
 
 const TermFilter = () => {
   const dispatch = useAppDispatch();
