@@ -15,7 +15,9 @@ const Course = ({ term, number, title, meets }) => {
           {title}
         </Typography>
         <Divider light />
-        <Typography variant="body2" className="course-time">{meets}</Typography>
+        <Typography variant="body2" className="course-time">
+          {meets}
+        </Typography>
       </CardContent>
     </Card>
   );

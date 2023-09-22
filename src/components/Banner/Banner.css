@@ -1,9 +1,17 @@
 .banner {
-    width: 100%;
-    height: auto;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 20px 0px 0px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 52px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 80px;
 }

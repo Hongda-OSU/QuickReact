@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "ZhuZiAWan";
+  src: url("https://cdn.jsdelivr.net/gh/Hongda-OSU/PicGo/image/ZhuZiAWan.ttf");
+  font-display: swap;
+}
+
 .course {
   display: flex;
   flex-direction: column;
@@ -6,24 +12,39 @@
 }
 
 .course-title {
-  margin: 10px 0 0 10px !important;
-  text-align: left;
+  overflow-wrap: break-word;
   color: rgba(0, 0, 0, 1);
+  font-family: "ZhuZiAWan" !important;
+  font-size: 24px !important;
+  font-weight: 100 !important;
+  text-align: left;
+  white-space: nowrap;
+  margin: 10px 0 0 10px !important;
 }
 
 .course-content {
-  min-height: 120px;
-  margin: 10px 40px 0 10px !important;
   overflow-wrap: break-word;
   color: rgba(0, 0, 0, 1);
+  font-family: "ZhuZiAWan" !important;
   font-size: 16px !important;
+  font-weight: 70 !important;
   text-align: left;
+  white-space: wrap;
+  min-height: 120px;
+  margin: 10px 40px 10px 10px !important;
 }
 
 .course-time {
-  min-height: 20px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-family: "ZhuZiAWan" !important;
+  font-size: 13px !important;
+  font-weight: 70 !important;
+  text-align: left;
+  white-space: wrap;
   display: flex;
-  justify-content: flex-start; 
-  align-items: center; 
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 20px;
   margin: 10px 0 0 10px !important;
 }
