@@ -1,12 +1,17 @@
 import TermHeader from "../TermHeader/TermHeader";
 import CourseList from "../CourseList/CourseList";
-import "./TermPage.less"
+import "./TermPage.less";
 
-const TermPage = () => {
+const TermPage = ({ termCourses, selectedCourses, conflictedCourses }) => {
   return (
     <div className="term-page">
       <TermHeader />
-      <CourseList />;
+      <CourseList
+        termCourses={termCourses}
+        selectedCourses={selectedCourses}
+        conflictedCourses={conflictedCourses}
+      />
+      ;
     </div>
   );
 };

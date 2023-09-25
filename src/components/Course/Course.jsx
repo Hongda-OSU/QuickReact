@@ -1,43 +1,27 @@
-import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useAppSelector, useAppDispatch } from "../../store/hook";
-import {
-  getCourseSchedulerSelectedCourses,
-  setCourseSchedulerSelectedCourses,
-} from "../../store/slices/courseSchedulerSlice";
+import { useAppDispatch } from "../../store/hook";
+import { setCourseSchedulerSelectedCourses } from "../../store/slices/courseSchedulerSlice";
 import "./Course.less";
 
-const Course = ({ term, number, title, meets }) => {
+const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
   const dispatch = useAppDispatch();
-  const selectedCourses = useAppSelector(getCourseSchedulerSelectedCourses);
-  const isSelected =
-    selectedCourses &&
-    selectedCourses.some(
-      (course) => course.number === number && course.term === term
-    );
 
   const onCourseCardClicked = () => {
-    if (isSelected) {
-      const filteredCourses = selectedCourses.filter(
-        (course) => !(course.number === number && course.term === term)
-      );
-      dispatch(setCourseSchedulerSelectedCourses(filteredCourses));
-    } else {
-      const updatedCourses = [
-        ...(selectedCourses || []),
-        { term, number, title, meets },
-      ];
-      dispatch(setCourseSchedulerSelectedCourses(updatedCourses));
+    if (!isConflicted) {
+      const courseSelected = { term, number, title, meets };
+      dispatch(setCourseSchedulerSelectedCourses(courseSelected));
     }
   };
 
   return (
     <Card
       variant="outlined"
-      className={`course ${isSelected ? "selected" : ""}`}
+      className={`course ${isSelected ? "card-selected" : ""} ${
+        isConflicted ? "card-disabled" : ""
+      }`}
       onClick={onCourseCardClicked}
     >
       <CardContent className="test">
@@ -47,7 +31,10 @@ const Course = ({ term, number, title, meets }) => {
         <Typography variant="body1" className="course-content">
           {title}
         </Typography>
-        <Divider light className="divider" />
+        <Divider
+          light
+          className={`divider ${isSelected ? "divider-selected" : ""}`}
+        />
         <Typography variant="body2" className="course-time">
           {meets}
         </Typography>

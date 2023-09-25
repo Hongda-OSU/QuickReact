@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const terms = ["Fall", "Winter", "Spring"];
+import { terms } from "../../helper/contract";
+import { hasCourseConflict } from "../../helper/helper";
 
 const initialState = {
   term: 0,
   title: undefined,
   courses: undefined,
   termCourses: undefined,
-  selectedCourses: undefined,
+  selectedCourses: [],
+  conflictedCourses: [],
 };
 
 const setCourseSchedulerTermReducer = (state, action) => {
@@ -37,7 +38,40 @@ const setCourseSchedulerCoursesReducer = (state, action) => {
 };
 
 const setCourseSchedulerSelectedCoursesReducer = (state, action) => {
-  state.selectedCourses = action.payload;
+  const courseSelected = action.payload;
+
+  const isCourseSelected = state.selectedCourses.some(
+    (course) => course.title === courseSelected.title
+  );
+
+  const termCoursesArray = Object.values(state.termCourses);
+
+  if (isCourseSelected) {
+    state.selectedCourses = state.selectedCourses.filter(
+      (course) => course.title !== courseSelected.title
+    );
+
+    const coursesConflicted = termCoursesArray.filter((course) =>
+      hasCourseConflict(course, courseSelected)
+    );
+
+    state.conflictedCourses = state.conflictedCourses.filter(
+      (conflictCourse) =>
+        !coursesConflicted.some(
+          (course) => course.title === conflictCourse.title
+        )
+    );
+  } else {
+    state.selectedCourses.push(courseSelected);
+
+    const coursesConflicted = termCoursesArray.filter(
+      (course) =>
+        course.title !== courseSelected.title &&
+        hasCourseConflict(course, courseSelected)
+    );
+
+    state.conflictedCourses.push(...coursesConflicted);
+  }
 };
 
 export const courseSchedulerSlice = createSlice({
@@ -62,9 +96,11 @@ export const getCourseSchedulerTerm = (state) => state.courseScheduler.term;
 export const getCourseSchedulerTitle = (state) => state.courseScheduler.title;
 export const getCourseSchedulerCourses = (state) =>
   state.courseScheduler.courses;
-export const getCourseSchedulerSelectedCourses = (state) =>
-  state.courseScheduler.selectedCourses;
 export const getCourseSchedulerTermCourses = (state) =>
   state.courseScheduler.termCourses;
+export const getCourseSchedulerSelectedCourses = (state) =>
+  state.courseScheduler.selectedCourses;
+export const getCourseSchedulerConflictedCourses = (state) =>
+  state.courseScheduler.conflictedCourses;
 
 export default courseSchedulerSlice.reducer;

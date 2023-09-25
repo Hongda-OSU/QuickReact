@@ -6,8 +6,10 @@ import { useAppDispatch, useAppSelector } from "../src/store/hook";
 import {
   getCourseSchedulerTitle,
   setCourseSchedulerTitle,
-  getCourseSchedulerCourses,
+  getCourseSchedulerTermCourses,
   setCourseSchedulerCourses,
+  getCourseSchedulerSelectedCourses,
+  getCourseSchedulerConflictedCourses,
 } from "../src/store/slices/courseSchedulerSlice";
 import "./App.less";
 
@@ -16,7 +18,9 @@ const App = () => {
     "https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php";
   const dispatch = useAppDispatch();
   const title = useAppSelector(getCourseSchedulerTitle);
-  const courses = useAppSelector(getCourseSchedulerCourses);
+  const termCourses = useAppSelector(getCourseSchedulerTermCourses);
+  const selectedCourses = useAppSelector(getCourseSchedulerSelectedCourses);
+  const conflictedCourses = useAppSelector(getCourseSchedulerConflictedCourses);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +38,13 @@ const App = () => {
   return (
     <div className="app">
       {title && <Banner title={title} />}
-      {courses && <TermPage />}
+      {termCourses && (
+        <TermPage
+          termCourses={termCourses}
+          selectedCourses={selectedCourses}
+          conflictedCourses={conflictedCourses}
+        />
+      )}
     </div>
   );
 };

@@ -9,13 +9,16 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { getCourseSchedulerTerm, setCourseSchedulerTerm } from "../../store/slices/courseSchedulerSlice";
+import {
+  getCourseSchedulerTerm,
+  setCourseSchedulerTerm,
+} from "../../store/slices/courseSchedulerSlice";
+import { terms } from "../../helper/contract";
 import "./TermFilter.less";
 
 const TermFilter = () => {
   const dispatch = useAppDispatch();
   const term = useAppSelector(getCourseSchedulerTerm);
-  const terms = ["Fall", "Winter", "Spring"];
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
