@@ -37,13 +37,13 @@ const TermFilter = () => {
   };
 
   return (
-    <>
+    <div className="term-filter">
       <ButtonGroup
         variant="contained"
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button id="term-button">{terms[term]}</Button>
+        <Button id="term-filter-button">{terms[term]}</Button>
         <Button
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}
@@ -91,7 +91,7 @@ const TermFilter = () => {
           </Grow>
         )}
       </Popper>
-    </>
+    </div>
   );
 };
 

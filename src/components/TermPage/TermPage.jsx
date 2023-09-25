@@ -1,11 +1,11 @@
-import TermFilter from "../TermFilter/TermFiler";
+import TermHeader from "../TermHeader/TermHeader";
 import CourseList from "../CourseList/CourseList";
 import "./TermPage.less"
 
 const TermPage = () => {
   return (
     <div className="term-page">
-      <TermFilter />
+      <TermHeader />
       <CourseList />;
     </div>
   );

@@ -1,0 +1,105 @@
+@font-face {
+  font-family: "ZhuZiAWan";
+  src: url("https://cdn.jsdelivr.net/gh/Hongda-OSU/PicGo/image/ZhuZiAWan.ttf");
+  font-display: swap;
+}
+
+.term-schedule button {
+  background-color: transparent !important;
+  border: 3px solid rgba(0, 0, 0, 1) !important;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 1) !important;
+  font-family: "ZhuZiAWan" !important;
+  text-transform: none !important;
+
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 52px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 32px;
+}
+
+#term-schedule-button {
+  min-width: 140px !important;
+  font-size: 16px !important;
+  font-weight: 300 !important;
+}
+
+.term-schedule-box-title {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-family: "ZhuZiAWan" !important;
+  font-size: 26px !important;
+  font-weight: 600 !important;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px !important;
+  margin: 12px 0 10px 0 !important;
+}
+
+.term-schedule-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: auto !important;
+  min-width: 600px !important;
+  height: 500px !important;
+  overflow: none;
+  background-color: white;
+  border: 3px solid #000;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  padding: 24px 24px 0 24px !important;
+  justify-content: space-between;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.term-schedule-item-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex: 1;
+  margin: 10px 0 10px 0;
+}
+
+.term-schedule-item {
+  font-family: "ZhuZiAWan" !important;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px !important;
+  margin: 10px 30px 0 30px !important;
+}
+
+.term-schedule-item:first-child {
+  margin-top: 0 !important;
+}
+
+.term-schedule-box-close-button {
+  font-family: "ZhuZiAWan" !important;
+  overflow-wrap: break-word;
+  color: rgb(255, 0, 0) !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px !important;
+  margin-bottom: 15px !important;
+}
+
+.term-schedule-box-close-button:hover {
+  transform: scale(1.05);
+  background-color: transparent !important;
+}
