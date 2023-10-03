@@ -2,6 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useAppDispatch } from "../../store/hook";
 import { setCourseSchedulerSelectedCourses } from "../../store/slices/courseSchedulerSlice";
 import "./Course.less";
@@ -16,6 +17,11 @@ const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
     }
   };
 
+  const onEditCourseButtonClicked = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   return (
     <Card
       variant="outlined"
@@ -24,7 +30,7 @@ const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
       }`}
       onClick={onCourseCardClicked}
     >
-      <CardContent className="test">
+      <CardContent className="course-card-content">
         <Typography variant="h5" component="div" className="course-title">
           {term + " CS " + number}
         </Typography>
@@ -39,6 +45,11 @@ const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
           {meets}
         </Typography>
       </CardContent>
+      <CardActions className="course-form-edit">
+        <Button size="small" className="course-form-edit-button" disableRipple={true} onClick={onEditCourseButtonClicked}>
+          Edit Course
+        </Button>
+      </CardActions>
     </Card>
   );
 };
