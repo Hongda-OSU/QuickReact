@@ -2,13 +2,23 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, CardActions } from "@mui/material";
 import { useAppDispatch } from "../../store/hook";
 import { setCourseSchedulerSelectedCourses } from "../../store/slices/courseSchedulerSlice";
+import { useNavigate } from "react-router-dom";
 import "./Course.less";
 
-const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
+const Course = ({
+  courseId,
+  term,
+  number,
+  title,
+  meets,
+  isSelected,
+  isConflicted,
+}) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onCourseCardClicked = () => {
     if (!isConflicted) {
@@ -18,8 +28,8 @@ const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
   };
 
   const onEditCourseButtonClicked = (e) => {
-    e.preventDefault();
     e.stopPropagation();
+    navigate(`/course/${courseId}/edit`);
   }
 
   return (
@@ -46,7 +56,12 @@ const Course = ({ term, number, title, meets, isSelected, isConflicted }) => {
         </Typography>
       </CardContent>
       <CardActions className="course-form-edit">
-        <Button size="small" className="course-form-edit-button" disableRipple={true} onClick={onEditCourseButtonClicked}>
+        <Button
+          size="small"
+          className="course-form-edit-button"
+          disableRipple={true}
+          onClick={onEditCourseButtonClicked}
+        >
           Edit Course
         </Button>
       </CardActions>

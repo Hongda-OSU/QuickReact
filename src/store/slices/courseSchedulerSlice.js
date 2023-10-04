@@ -102,5 +102,15 @@ export const getCourseSchedulerSelectedCourses = (state) =>
   state.courseScheduler.selectedCourses;
 export const getCourseSchedulerConflictedCourses = (state) =>
   state.courseScheduler.conflictedCourses;
+export const getCourseWithCourseId = (state, courseId) => {
+  if (
+    state.courseScheduler &&
+    state.courseScheduler.courses &&
+    state.courseScheduler.courses[courseId]
+  ) {
+    return state.courseScheduler.courses[courseId];
+  }
+  return null;
+};
 
 export default courseSchedulerSlice.reducer;
