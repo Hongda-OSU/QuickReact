@@ -16,6 +16,7 @@ const Course = ({
   meets,
   isSelected,
   isConflicted,
+  isAdmin,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Course = ({
   const onEditCourseButtonClicked = (e) => {
     e.stopPropagation();
     navigate(`/courses/${courseId}`);
-  }
+  };
 
   return (
     <Card
@@ -56,14 +57,16 @@ const Course = ({
         </Typography>
       </CardContent>
       <CardActions className="course-form-edit">
-        <Button
-          size="small"
-          className="course-form-edit-button"
-          disableRipple={true}
-          onClick={onEditCourseButtonClicked}
-        >
-          Edit Course
-        </Button>
+        {isAdmin && (
+          <Button
+            size="small"
+            className="course-form-edit-button"
+            disableRipple={true}
+            onClick={onEditCourseButtonClicked}
+          >
+            Edit Course
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

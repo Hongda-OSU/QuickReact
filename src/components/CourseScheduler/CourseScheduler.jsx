@@ -11,12 +11,13 @@ import {
   getCourseSchedulerSelectedCourses,
   getCourseSchedulerConflictedCourses,
 } from "../../store/slices/courseSchedulerSlice";
-import { useDbData, signOut, useAuthState } from "../../helper/firebase";
+import { useDbData, signOut } from "../../helper/firebase";
+import { useProfile } from "../../helper/profile";
 import "./CourseScheduler.less";
 
 const CourseScheduler = () => {
   const dispatch = useAppDispatch();
-  const [user] = useAuthState();
+  const [profile, profileError] = useProfile();
   const [data, error] = useDbData("/");
   const title = useAppSelector(getCourseSchedulerTitle);
   const termCourses = useAppSelector(getCourseSchedulerTermCourses);
@@ -35,7 +36,7 @@ const CourseScheduler = () => {
 
   return (
     <div className="course-scheduler">
-      {user && (
+      {profile.user && (
         <Button className="signout-button" onClick={signOut}>
           Sign Out
         </Button>
@@ -46,6 +47,7 @@ const CourseScheduler = () => {
           termCourses={termCourses}
           selectedCourses={selectedCourses}
           conflictedCourses={conflictedCourses}
+          isAdmin={profile.isAdmin}
         />
       )}
     </div>

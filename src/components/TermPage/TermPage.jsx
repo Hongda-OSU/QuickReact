@@ -2,7 +2,7 @@ import TermHeader from "../TermHeader/TermHeader";
 import CourseList from "../CourseList/CourseList";
 import "./TermPage.less";
 
-const TermPage = ({ termCourses, selectedCourses, conflictedCourses }) => {
+const TermPage = ({ termCourses, selectedCourses, conflictedCourses, isAdmin }) => {
   return (
     <div className="term-page">
       <TermHeader />
@@ -10,6 +10,7 @@ const TermPage = ({ termCourses, selectedCourses, conflictedCourses }) => {
         termCourses={termCourses}
         selectedCourses={selectedCourses}
         conflictedCourses={conflictedCourses}
+        isAdmin={isAdmin}
       />
       ;
     </div>

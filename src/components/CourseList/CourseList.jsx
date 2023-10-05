@@ -1,7 +1,7 @@
 import Course from "../Course/Course";
 import "./CourseList.less";
 
-const CourseList = ({ termCourses, selectedCourses, conflictedCourses }) => {
+const CourseList = ({ termCourses, selectedCourses, conflictedCourses, isAdmin }) => {
   return (
     <div className="course-list">
       {Object.entries(termCourses).map(([courseKey, courseData]) => {
@@ -28,6 +28,7 @@ const CourseList = ({ termCourses, selectedCourses, conflictedCourses }) => {
             meets={courseData.meets}
             isSelected={isSelected}
             isConflicted={isConflicted}
+            isAdmin={isAdmin}
           />
         );
       })}
