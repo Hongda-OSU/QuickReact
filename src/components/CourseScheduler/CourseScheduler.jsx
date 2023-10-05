@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import axios from "axios";
 import Banner from "../Banner/Banner";
 import TermPage from "../TermPage/TermPage";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
@@ -11,29 +10,26 @@ import {
   getCourseSchedulerSelectedCourses,
   getCourseSchedulerConflictedCourses,
 } from "../../store/slices/courseSchedulerSlice";
+import { useDbData } from "../../helper/firebase";
 import "./CourseScheduler.less";
 
 const CourseScheduler = () => {
-  const url =
-    "https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php";
   const dispatch = useAppDispatch();
   const title = useAppSelector(getCourseSchedulerTitle);
   const termCourses = useAppSelector(getCourseSchedulerTermCourses);
   const selectedCourses = useAppSelector(getCourseSchedulerSelectedCourses);
   const conflictedCourses = useAppSelector(getCourseSchedulerConflictedCourses);
+  const [data, error] = useDbData("/");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        dispatch(setCourseSchedulerTitle(response.data.title));
-        dispatch(setCourseSchedulerCourses(response.data.courses));
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+    if (data) {
+      dispatch(setCourseSchedulerTitle(data.title));
+      dispatch(setCourseSchedulerCourses(data.courses));
+    } 
+    if (error) {
+      console.error(error);
+    }
+  }, [data, error]);
 
   return (
     <div className="course-scheduler">
