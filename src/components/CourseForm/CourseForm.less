@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  flex-wrap: nowrap;
 }
 
 .course-form-title {
@@ -48,8 +49,8 @@
   display: flex;
   flex-direction: column;
   width: 620px;
-  margin-top: 30px;
-  flex: 1;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .course-form-content:first-child {
@@ -73,6 +74,11 @@
   margin-left: 40px !important;
 }
 
+.course-form-content-input-error {
+  width: auto !important;
+  margin-left: 40px !important;
+}
+
 .course-form-content-input input {
   height: 30px !important;
   padding-top: 8px !important;
@@ -82,6 +88,34 @@
   font-family: "ZhuZiAWan" !important;
   color: rgba(0, 0, 0, 1);
   font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px;
+}
+
+.course-form-content-input-error input {
+  height: 30px !important;
+  padding-top: 8px !important;
+  padding-left: 10px !important;
+  border-bottom: 3px solid red !important;
+
+  font-family: "ZhuZiAWan" !important;
+  color: rgba(0, 0, 0, 1);
+  font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px;
+}
+
+.course-form-content-input-error p {
+  height: auto !important;
+  padding-left: 10px !important;
+
+  font-family: "ZhuZiAWan" !important;
+  color: rgb(255, 0, 0) !important;
+  font-size: 13px !important;
   font-weight: 400;
   text-align: left;
   white-space: nowrap;

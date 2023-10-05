@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../store/hook";
 import { getCourseWithCourseId } from "../../store/slices/courseSchedulerSlice";
@@ -10,14 +11,35 @@ import "./CourseForm.less";
 const CourseForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
+  const meetsRegex = /^(([MTWRF]+)\s+(\d{1,2}:\d{2})-(\d{1,2}:\d{2}))?$/;
+
   const { courseId } = useParams();
   const { term, number, meets, title } = useAppSelector((state) =>
     getCourseWithCourseId(state, courseId)
   );
+  const [titleError, setTitleError] = useState(false);
+  const [meetsError, setMeetsError] = useState(false);
 
   const onCancelButtonClicked = () => {
     navigate(`/`);
+  };
+
+  const onTitleValueChanged = (e) => {
+    const title = e.target.value;
+    if (title.length < 2) {
+      setTitleError(true);
+    } else {
+      setTitleError(false);
+    }
+  };
+
+  const onMeetsValueChanged = (e) => {
+    const meets = e.target.value;
+    if (meets && !meetsRegex.test(meets)) {
+      setMeetsError(true);
+    } else {
+      setMeetsError(false);
+    }
   };
 
   return (
@@ -61,26 +83,42 @@ const CourseForm = () => {
           <label className="course-form-content-label">Meets:</label>
           <TextField
             fullWidth
-            error={false}
+            error={meetsError}
             variant="standard"
             defaultValue={meets}
             placeholder="Enter Course Meets"
-            helperText=""
+            helperText={
+              meetsError
+                ? "Must contain days and start-end, e.g., MWF 12:00-13:20"
+                : ""
+            }
             autoFocus={false}
-            className="course-form-content-input"
+            className={`${
+              meetsError
+                ? "course-form-content-input-error"
+                : "course-form-content-input"
+            }`}
+            onChange={onMeetsValueChanged}
           />
         </div>
         <div className="course-form-content">
           <label className="course-form-content-label">Title:</label>
           <TextField
             fullWidth
-            error={false}
+            error={titleError}
             variant="standard"
             defaultValue={title}
             placeholder="Enter Course Title"
-            helperText=""
+            helperText={
+              titleError ? "Course title must be at least two characters" : ""
+            }
             autoFocus={false}
-            className="course-form-content-input"
+            className={`${
+              titleError
+                ? "course-form-content-input-error"
+                : "course-form-content-input"
+            }`}
+            onChange={onTitleValueChanged}
           />
         </div>
       </Box>
