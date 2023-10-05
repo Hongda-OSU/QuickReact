@@ -29,7 +29,7 @@ const Course = ({
 
   const onEditCourseButtonClicked = (e) => {
     e.stopPropagation();
-    navigate(`/course/${courseId}/edit`);
+    navigate(`/courses/${courseId}`);
   }
 
   return (

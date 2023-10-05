@@ -7,7 +7,7 @@ const RouteDispatcher = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CourseScheduler />} />
-        <Route path="/course/:courseId/edit" element={<CourseForm />} />
+        <Route path="/courses/:courseId" element={<CourseForm />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

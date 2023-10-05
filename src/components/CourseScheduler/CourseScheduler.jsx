@@ -15,11 +15,11 @@ import "./CourseScheduler.less";
 
 const CourseScheduler = () => {
   const dispatch = useAppDispatch();
+  const [data, error] = useDbData("/");
   const title = useAppSelector(getCourseSchedulerTitle);
   const termCourses = useAppSelector(getCourseSchedulerTermCourses);
   const selectedCourses = useAppSelector(getCourseSchedulerSelectedCourses);
   const conflictedCourses = useAppSelector(getCourseSchedulerConflictedCourses);
-  const [data, error] = useDbData("/");
 
   useEffect(() => {
     if (data) {

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../store/hook";
+import { useAppSelector } from "../../store/hook";
 import { getCourseWithCourseId } from "../../store/slices/courseSchedulerSlice";
 import { useNavigate } from "react-router-dom";
+import { useDbUpdate } from "../../helper/firebase";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,13 +11,14 @@ import "./CourseForm.less";
 
 const CourseForm = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const meetsRegex = /^(([MTWRF]+)\s+(\d{1,2}:\d{2})-(\d{1,2}:\d{2}))?$/;
 
   const { courseId } = useParams();
+  const [update, result] = useDbUpdate(`/courses/${courseId}`);
   const { term, number, meets, title } = useAppSelector((state) =>
     getCourseWithCourseId(state, courseId)
   );
+  const [course, setCourse] = useState({ term, number, meets, title });
   const [titleError, setTitleError] = useState(false);
   const [meetsError, setMeetsError] = useState(false);
 
@@ -24,8 +26,19 @@ const CourseForm = () => {
     navigate(`/`);
   };
 
+  const onTermValueChanged = (e) => {
+    const term = e.target.value;
+    setCourse({ ...course, term });
+  };
+
+  const onNumberValueChanged = (e) => {
+    const number = e.target.value;
+    setCourse({ ...course, number });
+  };
+
   const onTitleValueChanged = (e) => {
     const title = e.target.value;
+    setCourse({ ...course, title });
     if (title.length < 2) {
       setTitleError(true);
     } else {
@@ -35,11 +48,31 @@ const CourseForm = () => {
 
   const onMeetsValueChanged = (e) => {
     const meets = e.target.value;
+    setCourse({ ...course, meets });
     if (meets && !meetsRegex.test(meets)) {
       setMeetsError(true);
     } else {
       setMeetsError(false);
     }
+  };
+
+  useEffect(() => {
+    if (result) {
+      if (result.error) {
+        console.error("Failed to update:", result.error);
+      } else {
+        console.log("Update success:", result.message);
+      }
+    }
+  }, [result]);
+
+  const onSubmitButtonClicked = (e) => {
+    e.preventDefault();
+    if (titleError || meetsError) {
+      return;
+    }
+    update(course);
+    navigate("/");
   };
 
   return (
@@ -64,6 +97,7 @@ const CourseForm = () => {
             helperText=""
             autoFocus={false}
             className="course-form-content-input"
+            onChange={onTermValueChanged}
           />
         </div>
         <div className="course-form-content">
@@ -77,6 +111,7 @@ const CourseForm = () => {
             helperText=""
             autoFocus={false}
             className="course-form-content-input"
+            onChange={onNumberValueChanged}
           />
         </div>
         <div className="course-form-content">
@@ -129,7 +164,11 @@ const CourseForm = () => {
         >
           Cancel
         </Button>
-        <Button className="course-form-submit-button" onClick={() => {}}>
+        <Button
+          className="course-form-submit-button"
+          disabled={titleError || meetsError}
+          onClick={onSubmitButtonClicked}
+        >
           Submit
         </Button>
       </div>
