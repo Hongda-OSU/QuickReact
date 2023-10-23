@@ -1,12 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getDatabase, onValue, ref, update } from "firebase/database";
+import {
+  getDatabase,
+  onValue,
+  ref,
+  update,
+  connectDatabaseEmulator,
+} from "firebase/database";
 import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
+  connectAuthEmulator,
+  signInWithCredential,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -28,6 +36,21 @@ if (!getApps().length) {
 }
 
 const database = getDatabase(firebase);
+const auth = getAuth(firebase);
+
+console.log("mode: ", import.meta.env.MODE);
+if (!window.EMULATION && !import.meta.env.MODE || import.meta.env.MODE === "development") {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+  signInWithCredential(
+    auth,
+    GoogleAuthProvider.credential(
+      '{"sub": "HJBDwUWLNv5eovfcTwizkPSBeS31", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+    )
+  );
+  window.EMULATION = true;
+}
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
