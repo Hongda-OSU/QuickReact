@@ -35,7 +35,7 @@ const CourseScheduler = () => {
   }, [data, error]);
 
   return (
-    <div className="course-scheduler">
+    <div className="course-scheduler" data-cy="course">
       {profile.user && (
         <Button className="signout-button" onClick={signOut}>
           Sign Out

@@ -84,6 +84,7 @@ const TermFilter = () => {
                       key={option}
                       selected={index === term}
                       onClick={(event) => handleMenuItemClick(event, index)}
+                      className={`term-option-${option.toLowerCase()}`}
                     >
                       {option}
                     </MenuItem>
